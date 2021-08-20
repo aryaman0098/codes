@@ -6,33 +6,27 @@
 using namespace std;
 
 int findPlatform(int arr[], int dep[], int n){
-    unordered_map<int, int> m;
-    vector< vector<int> > compTrains;
-    vector<int> temp;
-    int counter = 0; 
-    temp.push_back(counter);
-    m[counter] = 1;
-    while(m.size() != n){
-        for(int i = 1; i < n; i++){
-            if(m.find(i) == m.end()){
-                counter = i;
-                if(temp.size() == 0){
-                    temp.push_back(counter);
-                }
-                break;
+    sort(arr, arr + n);
+    sort(dep, dep + n);
+    int neededPlat = 0;
+    int maxPlat = 0;
+    int n1 = 0, n2 = 0;
+    while(n1 < n && n2 < n){
+        if (arr[n1] <= dep[n2]){
+            neededPlat++;
+            n1++;
+        }else{
+            neededPlat--;
+            if(neededPlat < 0){
+                neededPlat = 0;
             }
+            n2++;
         }
-        while(counter < n){
-            if(dep[temp.size() - 1] < arr[counter] && m.find(counter) == m.end()){
-                temp.push_back(counter);
-                m[counter] = 1;
-            }
-            counter++;
+        if(maxPlat < neededPlat){
+            maxPlat = neededPlat;
         }
-        compTrains.push_back(temp);
-        temp.clear();
     }
-    return compTrains.size();
+    return maxPlat;
 }
 
 int main(){
