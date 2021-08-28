@@ -2,17 +2,14 @@
 
 using namespace std;
 
-int orangesRotting(vector<vector<int>>& grid){
-    int n = grid.size(), m = grid[0].size();
-    int time = 0;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            
-        }
-    }
-}
-
 int main(){
 
+    unordered_map<int, int> u;
+    u[1] = 100;
+    u[2] = 200;
+    for(int i = 0; i < 3; i++){
+        cout<<u[i]<<"\n";
+    }
     return 0;
 }
+
