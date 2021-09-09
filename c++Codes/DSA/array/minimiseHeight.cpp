@@ -1,19 +1,24 @@
+//https://practice.geeksforgeeks.org/problems/minimize-the-heights3351/1
+
 #include<bits/stdc++.h>
 
 using namespace std;
 
 int minimisematrix(int arr[], int n, int k){
-    int min = arr[0];
-    int max = arr[0];
-    for(int i = 1; i < n; i++){
-        if(arr[i] > max){
-            max = arr[i];
+    sort(arr, arr + n);
+    int ans = arr[n - 1] - arr[0];
+    int smallest = arr[0] + k;
+    int largest = arr[n] - k;
+    int mi, ma;
+    for(int i = 0; i < n - 1; i++){
+        mi = min(smallest, arr[i + 1] - k);
+        ma = max(largest, arr[i] + k);
+        if(mi < 0){
+            continue;
         }
-        if(arr[i] < min){
-            min = arr[i];
-        }
+        ans = min(ans, ma - mi);
     }
-    return max - min - 2*k;
+    return ans;
 }
 
 int main(){
