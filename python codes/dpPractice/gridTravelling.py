@@ -1,4 +1,4 @@
-#move from (1, 1) to (m, n)
+#number of ways to move from (1, 1) to (m, n)
 
 import sys
 
@@ -16,4 +16,4 @@ def gridTraveller(m, n, memo):
         memo[key] = gridTraveller(m - 1, n, memo) + gridTraveller(m, n - 1, memo)
         return memo[key]
 
-print(gridTraveller(18, 18, {}))
+print(gridTraveller(18, 18, {})) 
