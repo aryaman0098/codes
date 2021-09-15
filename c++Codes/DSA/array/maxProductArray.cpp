@@ -8,7 +8,7 @@ long long maxProduct(vector<int> arr, int n){
     long long maxAtIndex = 1;
     long long minAtIndex = 1;
     long long max = INT_MIN;
-    for long long i = 0; i < n; i++){
+    for(long long i = 0; i < n; i++){
         if(arr[i] == 0){
             maxAtIndex = 1;
             minAtIndex = 1;
