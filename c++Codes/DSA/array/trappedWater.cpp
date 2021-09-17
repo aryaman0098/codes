@@ -5,52 +5,32 @@
 using namespace std;
 
 long long trappingWater(int arr[], int n){
+    vector<int> maxR;
+    vector<int> maxL;
+    int m1 = INT_MIN;
+    for(int i = 0; i < n; i++){
+        if(arr[i] > m1){
+            m1 = arr[i];
+        }
+        maxL.push_back(m1);
+    }
+    int m2 = INT_MIN;
+    for(int i = n - 1; i >= 0; i--){
+        if(arr[i] > m2){
+            m2 = arr[i];
+        }
+        maxR.push_back(m2);
+    }    
+    reverse(maxR.begin(), maxR.end());
     long long amount = 0;
-    vector<pair<int, int> > m;
-    m.push_back(make_pair(0, n - 1));
-    int maxTillNow = arr[n - 1];
-    int index = n - 1;
-    for(int i = n - 2; i >= 0; i--){
-        if(arr[i + 1] >= maxTillNow){
-            maxTillNow = arr[i + 1];
-            index = i + 1;
-        }
-        m.push_back(make_pair(maxTillNow, index));
-    }
-    reverse(m.begin(), m.end());
-    int ht;
-    int width;
-    int flag = 1;
-    int i;
-    for(i = 0; i < n; i++){
-        if(arr[i + 1] < arr[i]){
-            break;
-        }
-    }
-    for(; i < n; i++){
-        if(flag == 1){
-            ht = min(arr[i], m[i].first);
-            if(ht == 0){
-                break;
-            }
-            width = m[i].second - i - 1;
-            amount += width * ht;
-            flag = 0;
-            index = m[i].second;
-        }else{
-            if(i == index){
-                flag = 1;
-                i--;
-            }else{
-                amount -= arr[i];
-            }
-        }
+    for(int i = 0; i < n; i++){
+        amount += min(maxL[i], maxR[i]) - arr[i];
     }
     return amount;
 }
 
 int main(){ 
-    int arr[] = {2,1,6,8,5};
+    int arr[] = {2,3,6,8,5};
     cout<<trappingWater(arr, 5);
     return 0;
 }
