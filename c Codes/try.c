@@ -1,11 +1,16 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<string.h>
+
+char *vow = "aeiou",c,ch;
 
 int main(){
-
-    int n = 1;
-    for(int i=0; i<100000000; i++){n++;}
-    printf("%d\n", n);
-
-    return 0;
+    int i  = 0, n;
+    for(scanf("%i", &n), getchar(); i < n;){
+        putc(ch = getchar(), stdout);i++;
+        if(strchr(vow, ch)){
+            while(++i&&strchr(vow, c = getchar()));
+            putc(c, stdout);
+        }
+    }
 } 
