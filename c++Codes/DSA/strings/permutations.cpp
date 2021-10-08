@@ -20,7 +20,7 @@ vector<string> find_permutation(string S){
     vector<string> ans;
     int n = S.size();
     permute(S, 0, n - 1, ans);
-    sor(ans.begin(), ans.end());
+    sort(ans.begin(), ans.end());
     return ans;
 }
 
