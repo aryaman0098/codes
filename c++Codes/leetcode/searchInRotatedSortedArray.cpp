@@ -24,14 +24,13 @@ int search(vector<int>& nums, int target) {
         if(nums[0] == target) return 0;
         return - 1;
     }
-    for(i = nums.size() - 1; i >= 0; i--){
-        if(i == 0){
-            break;
-        }
-        if(nums[i - 1] > nums[i]){
-            break;
-        }
+    int l = 0, h = nums.size() - 1, mid;
+    while(l < h){
+        mid = l + (h - l) / 2;
+        if(nums[mid] > nums[h]) l = mid + 1;
+        else h = mid;
     }
+    i = l;
     if(i == 0){
         return binarySearch(0, nums.size() - 1, nums, target);
     }
