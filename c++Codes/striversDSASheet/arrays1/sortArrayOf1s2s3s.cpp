@@ -1,11 +1,13 @@
 //https://leetcode.com/problems/sort-colors/
 
+//Dutch national flag algorithm
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
 void swap(int *x, int *y) {
-  int temp = &x;
+  int temp = *x;
   *x = *y;
   *y = temp;
 }
@@ -19,13 +21,13 @@ void sortColors(vector<int>& nums) {
     while(mid <= high) {
 
       if(nums[mid] == 0) {
-        swap(*nums[low], *nums[mid]);
+        swap(&nums[low], &nums[mid]);
         low++;
         mid++;
       } else if(nums[mid] == 1) {
         mid++;
       } else {
-        swap(*nums[mid], *nums[high]);
+        swap(&nums[mid], &nums[high]);
         high--;
       }
     }
