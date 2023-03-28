@@ -4,11 +4,11 @@
 
 using namespace std;
 
-long long Count(long long arr[], long long left, long long mid, long long right){
+long long Count(long long arr[], long long low, long long mid, long long high){
     long long count = 0;
-    long long temp[right - left + 1];
-    long long k = 0, i = left, j = mid;
-    for(; i < mid && j <= right;){
+    long long temp[high - low + 1];
+    long long k = 0, i = low, j = mid;
+    for(; i < mid && j <= high;){
         if(arr[i] <= arr[j]){
             temp[k] = arr[i];
             k++;
@@ -26,13 +26,13 @@ long long Count(long long arr[], long long left, long long mid, long long right)
         k++;
         i++;
     }
-    while(j <= right){
+    while(j <= high){
         temp[k] = arr[j];
         j++;
         k++;
     }
-    for(int a = left; a <= right; a++){
-        arr[a] = temp[a - left];
+    for(int a = low; a <= high; a++){
+        arr[a] = temp[a - low];
     }
 
     return count;
