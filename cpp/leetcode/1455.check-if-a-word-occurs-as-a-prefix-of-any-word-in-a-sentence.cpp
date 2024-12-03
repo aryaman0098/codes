@@ -24,7 +24,7 @@ public:
         }   
         tokenizedArray.push_back(temp);
         int size = searchWord.length();
-        for(int i = 0; i < tokenizedArray.size(), i++) {
+        for(int i = 0; i < tokenizedArray.size(); i++) {
           if(tokenizedArray[i].substr(0, size) == searchWord) {
             return i + 1;
           }
