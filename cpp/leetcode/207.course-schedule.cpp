@@ -10,7 +10,6 @@ using namespace std;
 
 // @lc code=start
 class Solution {
-private:
 public:
     bool dfs(int node, unordered_map<int, vector<int>>& adj, vector<bool>& visited, vector<bool>& inPath) {
         visited[node] = true;
