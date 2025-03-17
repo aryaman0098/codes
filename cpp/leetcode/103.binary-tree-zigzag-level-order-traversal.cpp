@@ -19,7 +19,7 @@ struct TreeNode {
 using namespace std;
 
 class Solution {
-    private:
+private:
     void zigZagTraversal(TreeNode* node, vector<vector<int>> &v, int level) {
         v[level].push_back(node->val);
         if(node->left == nullptr && node->right == nullptr) {
