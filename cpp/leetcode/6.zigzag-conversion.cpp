@@ -13,6 +13,7 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         unordered_map<int, string> u;
+        if(numRows == 1) return s;
         for(int i = 0; i < numRows; i++) {
             u[i] = "";
         }
