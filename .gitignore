@@ -4,3 +4,4 @@
 *.DS_Store
 testCase
 node_modules
+test.cpp
