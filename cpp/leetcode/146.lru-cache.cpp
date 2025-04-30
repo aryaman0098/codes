@@ -10,85 +10,69 @@ using namespace std;
 
 // @lc code=start
 
+
 class Node {
-  public:
-    pair<int, int> value;
-    Node* next; 
+public:
     Node* prev;
-    Node(pair<int, int> value) {
-      this->value = value;
-      next = nullptr;
-      prev = nullptr;
+    Node* next;
+    int key;
+    int val;
+
+    Node(int key, int val) {
+        this->next = nullptr;
+        this->prev = nullptr;
+        this->key = key;
+        this->val = val;
     }
 };
 
 class LRUCache {
-  private: 
-    int cacheCapacity;
+private:
     unordered_map<int, Node*> u;
     Node* head;
     Node* tail;
-  public:
+    int capacity;
 
-    LRUCache(int size) {
-      cacheCapacity = size;
-      u = {};
-      head = new Node({-1, -1});
-      tail = new Node({-1, -1});
-      head->next = tail;
-      tail->prev = head;
-    }
-
-    void insertValueAtHead(int key, int value) {
-      if(head->value.first == -1) {
-        head->value = {key, value};
-        return;
-      }
-      Node* newNode = new Node({key, value});
-      newNode->next = head;
-      head->prev = newNode;
-      head = newNode;
+    Node* insertAfterHead(int key, int val) {
+        Node* newNode = new Node(key, val);
+        newNode->next = head->next;
+        head->next = newNode;
+        newNode->prev = head;
+        return newNode;
     }
 
     void deleteNode(Node* node) {
-      if(node == head) {
-        node->value = {-1, -1};
-        return;
-      }
-      node->prev->next = node->next;
-      node->next->prev = node->prev;
-      delete node;
+        int key = node->key;
+        u.erase(key);
+        Node* temp = node->prev;
+        node->prev->next = node->next;
+        node->next->prev = temp;
+        delete(node);
     }
 
+public:
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+        head = new Node(-1, -1);
+        tail =  new Node(-1, - 1);
+        tail->prev = head;
+        head->next = tail;
+    }
+    
     int get(int key) {
-      if(u.find(key) == u.end()) {
-        return -1;
-      }
-      int value = u[key]->value.second;
-      deleteNode(u[key]);
-      u.erase(key);
-      insertValueAtHead(key, value);
-      u[key] = head;
-      return value;
+        if(u.find(key) == u.end()) return -1;
+        Node* node = u[key];
+        int val = node->val;
+        deleteNode(node);
+        u[key] = insertAfterHead(key, val);
+        return val;
     }
     
     void put(int key, int value) {
-      if(u.find(key) != u.end()) {
-        deleteNode(u[key]);
-        u.erase(key);
-        insertValueAtHead(key, value);
-        u[key] = head;   
-        return; 
-      }
-      if(u.size() < cacheCapacity) {
-        insertValueAtHead(key, value);
-        u[key] = head;
-        return;
-      }
-      u.erase(tail->prev->value.first);
-      deleteNode(tail->prev);
-      insertValueAtHead(key, value);
-      u[key] = head;
+        if(u.size() >= capacity) {
+            deleteNode(tail->prev);
+        }
+        u[key] = insertAfterHead(key, value);
     }
 };
 
