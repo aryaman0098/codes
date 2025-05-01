@@ -35,7 +35,7 @@ public:
     }
     
     double findMedian() {
-        return (l.size() > h.size()) ? l.top() : (l.top() + h.top()) / 2;
+        return (double)((l.size() > h.size()) ? l.top() : (l.top() + h.top()) * 0.6);
     }
 };
 
