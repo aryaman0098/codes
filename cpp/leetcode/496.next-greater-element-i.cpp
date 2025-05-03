@@ -12,22 +12,16 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        int n = nums2.size();
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        int n = nums.size();
         stack<int> s;
-        unordered_map<int, int> u;
-        for(int i = n - 1; i >= 0; i--) {
-            while(!s.empty() && s.top() < nums2[i]) 
-                s.pop();
-            if(s.empty()) 
-                u[nums2[i]] = -1;
-            else 
-                u[nums2[i]] = s.top();
-            s.push(nums2[i]);
-        }
-        vector<int> ans;
-        for(auto c: nums1) {
-            ans.push_back(u[nums1[c]]);
+        vector<int> ans(n);
+        for(int i = 2 * n - 1; i >= 0; i--) {
+            while(!s.empty() && s.top() <= nums[i % n]) s.pop();
+            if(i < n) {
+                ans[i] = (s.empty()) ? -1 : s.top();
+            }
+            s.push(nums[i % n]);
         }
         return ans;
     }
