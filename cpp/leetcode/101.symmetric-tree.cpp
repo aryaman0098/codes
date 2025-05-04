@@ -27,7 +27,7 @@ private:
         if((lc == nullptr && rc != nullptr) || (lc != nullptr && rc == nullptr)) return false;
         else {
             if(lc->val != rc->val) return false;
-            return checkChilds(lc->left, rc->right) && checkChilds(lc->right, lc->left);
+            return checkChilds(lc->left, rc->right) && checkChilds(lc->right, rc->left);
         }
     }
 public:
