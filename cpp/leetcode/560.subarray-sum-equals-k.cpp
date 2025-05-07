@@ -18,9 +18,10 @@ public:
         u[0]++;
         for(int i = 0; i < nums.size(); i++) {
             sum += nums[i];
-            if(u.find(sum) != u.end()) sum += u[sum];
+            if(u.find(sum - k) != u.end()) count += u[sum - k];
             u[sum]++;
         }
+        return count;   
     }
 };
 // @lc code=end
