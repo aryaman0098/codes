@@ -13,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
-        int ans = 0, prevIndex = INT_MIN, prevCount = INT_MIN, r = bank.size(),
+        int ans = 0, prevCount = INT_MIN, r = bank.size(),
             c = bank[0].size();
         for (int i = 0; i < r; i++) {
             int newCount = 0;
@@ -21,10 +21,9 @@ public:
                 if (bank[i][j] == '1')
                     newCount++;
             if (newCount > 0) {
-                if (prevIndex != INT_MIN) {
+                if (prevCount != INT_MIN) {
                     ans += prevCount * newCount;
                 }
-                prevIndex = i;
                 prevCount = newCount;
             }
         }
